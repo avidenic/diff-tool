@@ -8,7 +8,7 @@ namespace Descartes.Demo.Infrastructure
     {
         public BusinessRuleException() { }
         public BusinessRuleException(string message) : base(message) { }
-        public BusinessRuleException(string message, System.Exception inner) : base(message, inner) { }
+        public BusinessRuleException(string message, Exception inner) : base(message, inner) { }
         protected BusinessRuleException(
             SerializationInfo info,
             StreamingContext context) : base(info, context) { }

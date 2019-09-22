@@ -24,6 +24,7 @@ namespace Descartes.Demo.Models
             get
             {
                 // only display them if needed
+                // TODO: check how to configure system.text.json serializer to do this
                 if (DiffResultType == DiffResult.ContentDoesNotMatch)
                 {
                     return _differences;
