@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Descartes.Demo.Infrastructure;
 using Descartes.Demo.Services;
@@ -29,7 +31,11 @@ namespace Descartes.Demo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(o =>
+            {
+                o.JsonSerializerOptions.IgnoreNullValues = true;
+                o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
             services.Configure<RouteOptions>(c =>
             {
                 c.ConstraintMap.Add("side", typeof(SideRouteConstraint));

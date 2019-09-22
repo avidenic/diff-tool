@@ -20,7 +20,7 @@ namespace Descartes.Demo.Services
         {
             if (!Store.TryGetValue(id, out Diff diff) || diff == null)
             {
-                return null;
+                return Task.FromResult(null as DiffResponse);
             }
 
             try
@@ -29,7 +29,7 @@ namespace Descartes.Demo.Services
             }
             catch (BusinessRuleException)
             {
-                return null;
+                return Task.FromResult(null as DiffResponse);
             }
         }
     }

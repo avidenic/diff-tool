@@ -39,7 +39,8 @@ namespace Descartes.Demo.Models
 
             this.differences = new List<Difference>();
             var currentLength = 0;
-            for (int i = 0; i < dataToCompare[0].Length; i++)
+            var length = dataToCompare[0].Length;
+            for (int i = 0; i < length; i++)
             {
                 if (dataToCompare[0][i] != dataToCompare[1][i])
                 {
@@ -52,6 +53,12 @@ namespace Descartes.Demo.Models
                     differences.Add(new Difference { Offset = i - currentLength, Length = currentLength });
                     currentLength = 0;
                 }
+            }
+            
+            // chek leftovers
+            if (currentLength > 0)
+            {
+                differences.Add(new Difference { Offset = length - currentLength, Length = currentLength });
             }
 
             return this.differences.ToArray();

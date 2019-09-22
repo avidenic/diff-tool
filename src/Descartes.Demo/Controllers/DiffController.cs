@@ -35,7 +35,7 @@ namespace Descartes.Demo.Controllers
             diff = await _service.GetDiff(id);
             if (diff == null)
             {
-                NotFound();
+                return NotFound();
             }
 
             return Ok(diff);
