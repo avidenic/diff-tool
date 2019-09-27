@@ -15,11 +15,11 @@ namespace Descartes.Demo.Models
             {
                 dataToDiff[(int)index] = Convert.FromBase64String(value);
                 // reset cache
-                this.differences = null;
+                this.differences.Clear();
             }
         }
 
-        private IList<Difference> differences;
+        private IList<Difference> differences = new List<Difference>();
 
         /// <summary>
         /// Gets the differences between compared sides
@@ -29,7 +29,7 @@ namespace Descartes.Demo.Models
         public IReadOnlyCollection<Difference> GetDifferences()
         {
             // return cached data
-            if (this.differences != null && this.differences.Any())
+            if (this.differences.Any())
             {
                 return this.differences.ToArray();
             }
@@ -45,31 +45,30 @@ namespace Descartes.Demo.Models
             {
                 return null;
             }
-
-            this.differences = new List<Difference>();
-            var currentLength = 0;
+            
+            var currentDiffLength = 0;
             var length = dataToDiff[0].Length;
             for (int i = 0; i < length; i++)
             {
-                // if data is different, increase length and check next byte
+                // if data is different, increase current diff length and check next byte
                 if (dataToDiff[0][i] != dataToDiff[1][i])
                 {
-                    currentLength += 1;
+                    currentDiffLength += 1;
                     continue;
                 }
 
                 // currently there is no difference, but was in previous comparison, so add it
-                if (currentLength > 0)
+                if (currentDiffLength > 0)
                 {
-                    differences.Add(new Difference { Offset = i - currentLength, Length = currentLength });
-                    currentLength = 0;
+                    differences.Add(new Difference { Offset = i - currentDiffLength, Length = currentDiffLength });
+                    currentDiffLength = 0;
                 }
             }
 
             // chek leftovers
-            if (currentLength > 0)
+            if (currentDiffLength > 0)
             {
-                differences.Add(new Difference { Offset = length - currentLength, Length = currentLength });
+                differences.Add(new Difference { Offset = length - currentDiffLength, Length = currentDiffLength });
             }
 
             return this.differences.ToArray();
