@@ -1,5 +1,5 @@
 # diff-tool
-A solution for Descartes labs tasks
+A solution for Descartes labs task
 
 ## Assumptions
 * As task did not specify what kind of storage should be used, I am using in memory storage and I simulate async I/O operations
