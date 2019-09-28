@@ -14,7 +14,7 @@ A solution for Descartes labs tasks
 ```json
 {
   "sdk": {
-    "version": "2.2.100"
+    "version": "3.0.100"
   }
 }
 ```
