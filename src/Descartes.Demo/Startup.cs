@@ -28,10 +28,12 @@ namespace Descartes.Demo
                 o.JsonSerializerOptions.IgnoreNullValues = true;
                 o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
+            
             services.Configure<RouteOptions>(c =>
             {
                 c.ConstraintMap.Add("side", typeof(SideRouteConstraint));
             });
+
             services.AddScoped<IDiffService, InMemoryDiffService>();
             services.AddSwaggerGen(c =>
             {
@@ -55,7 +57,7 @@ namespace Descartes.Demo
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Diff API V1");
                 c.RoutePrefix = string.Empty;
             });
 

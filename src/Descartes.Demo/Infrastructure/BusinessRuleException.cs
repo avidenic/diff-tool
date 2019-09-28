@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace Descartes.Demo.Infrastructure
 {
+    /// <summary>
+    /// Represents errors that happened when trying to validate business rules
+    /// </summary>
     [Serializable]
     public class BusinessRuleException : Exception
     {

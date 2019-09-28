@@ -5,12 +5,15 @@ using Descartes.Demo.Models;
 
 namespace Descartes.Demo.Services
 {
+    /// <summary>
+    /// Stores differences in memory
+    /// </summary>
     public class InMemoryDiffService : IDiffService
     {
         private static readonly ConcurrentDictionary<int, Comparison> Store = new ConcurrentDictionary<int, Comparison>();
 
         /// <inheritdoc cref="IDiffService" />
-        public Task AddDiff(int id, Side side, DiffRequest request)
+        public Task AddDiffAsync(int id, Side side, DiffRequest request)
         {
             var comparison = Store.GetOrAdd(id, f => new Comparison());
             comparison[side] = request.Data;
@@ -19,7 +22,7 @@ namespace Descartes.Demo.Services
         }
 
         /// <inheritdoc cref="IDiffService" />
-        public Task<DiffResponse> GetDiff(int id)
+        public Task<DiffResponse> GetDiffAsync(int id)
         {
             // if nothing is stored or null value is stored, simulate I/O and return null
             if (!Store.TryGetValue(id, out Comparison comparison) || comparison == null)

@@ -5,8 +5,12 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Descartes.Demo.Infrastructure
 {
+    /// <summary>
+    /// A route constraint that checks that supplied data is indeed a side enum
+    /// </summary>
     public class SideRouteConstraint : IRouteConstraint
     {
+        // TODO: extend to accept enum type as a parameter
         public bool Match(HttpContext httpContext, IRouter route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
         {
             var match = values[routeKey]?.ToString();

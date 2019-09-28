@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Descartes.Demo.Controllers
 {
     /// <summary>
-    /// 
+    /// Add a diff to be compared or get the comparison
     /// </summary>
     [ApiController, Route("v1/diff")]
     public class DiffController : ControllerBase
@@ -21,10 +21,10 @@ namespace Descartes.Demo.Controllers
         /// <summary>
         /// Creates or modifies a part of the diff for comparison
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="side"></param>
-        /// <param name="diff"></param>
-        /// <returns></returns>
+        /// <param name="id">Diff id</param>
+        /// <param name="side">Diff side</param>
+        /// <param name="diff">Diff data</param>
+        /// <returns>201 If diff was succsfully added</returns>
         [HttpPut("{id:int:min(1)}/{side:side}")]
         public async Task<IActionResult> Put(int id, Side side, [FromBody]DiffRequest diff)
         {
@@ -33,7 +33,7 @@ namespace Descartes.Demo.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _service.AddDiff(id, side, diff);
+            await _service.AddDiffAsync(id, side, diff);
             return StatusCode((int)HttpStatusCode.Created);
         }
 
@@ -45,7 +45,7 @@ namespace Descartes.Demo.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> Get(int id)
         {
-            DiffResponse diff = await _service.GetDiff(id);
+            DiffResponse diff = await _service.GetDiffAsync(id);
             if (diff == null)
             {
                 return NotFound();

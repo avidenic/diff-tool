@@ -5,10 +5,15 @@ using Descartes.Demo.Infrastructure;
 
 namespace Descartes.Demo.Models
 {
+    /// <summary>
+    /// A comparison between diff data
+    /// </summary>
     public class Comparison
     {
+        // hardcoded lenght of 2 is ok for this scenaro
         private byte[][] dataToDiff = new byte[2][];
 
+        // set diff data side by index
         public string this[Side index]
         {
             set
@@ -45,7 +50,7 @@ namespace Descartes.Demo.Models
             {
                 return null;
             }
-            
+
             var currentDiffLength = 0;
             var length = dataToDiff[0].Length;
             for (int i = 0; i < length; i++)

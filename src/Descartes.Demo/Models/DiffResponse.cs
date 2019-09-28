@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace Descartes.Demo.Models
 {
+    /// <summary>
+    /// A diff response message
+    /// </summary>
     public class DiffResponse
     {
         public DiffResponse(IReadOnlyCollection<Difference> differences)
@@ -23,7 +26,7 @@ namespace Descartes.Demo.Models
         {
             get
             {
-                // only display them if needed
+                // only return differences if needed
                 // TODO: check how to configure system.text.json serializer to do this
                 if (DiffResultType == DiffResult.ContentDoesNotMatch)
                 {
@@ -32,6 +35,11 @@ namespace Descartes.Demo.Models
                 return null;
             }
         }
+
+        /// <summary>
+        /// Type of diff calculation result
+        /// </summary>
+        /// <value></value>
         public DiffResult DiffResultType { get; }
     }
 }
